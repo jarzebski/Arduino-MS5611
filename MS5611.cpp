@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <Wire.h>
 #include <math.h>
 
-#include <MS5611.h>
+#include "MS5611.h"
 
 bool MS5611::begin(ms5611_osr_t osr)
 {
