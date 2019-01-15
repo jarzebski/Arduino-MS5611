@@ -5,6 +5,8 @@ Version: 1.0.0
 (c) 2014 Korneliusz Jarzebski
 www.jarzebski.pl
 
+Modified by el-NASA (Daniel Alejandro Rodriguez) 2019 
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the version 3 GNU General Public License as
 published by the Free Software Foundation.
@@ -214,9 +216,9 @@ uint16_t MS5611::readRegister16(uint8_t reg)
     #endif
     Wire.endTransmission();
 
-    Wire.beginTransmission(MS5611_ADDRESS);
+    //Wire.beginTransmission(MS5611_ADDRESS);
     Wire.requestFrom(MS5611_ADDRESS, 2);
-    while(!Wire.available()) {};
+    //while(!Wire.available()) {};
     #if ARDUINO >= 100
         uint8_t vha = Wire.read();
         uint8_t vla = Wire.read();
@@ -224,7 +226,7 @@ uint16_t MS5611::readRegister16(uint8_t reg)
         uint8_t vha = Wire.receive();
         uint8_t vla = Wire.receive();
     #endif;
-    Wire.endTransmission();
+    //Wire.endTransmission();
 
     value = vha << 8 | vla;
 
@@ -232,7 +234,7 @@ uint16_t MS5611::readRegister16(uint8_t reg)
 }
 
 // Read 24-bit from register (oops XSB, MSB, LSB)
-uint32_t MS5611::readRegister24(uint8_t reg)
+uint32_t MS5611::readRegister24(uint8_t reg)// reg is MS5611_CMD_ADC_READ = 0x00
 {
     uint32_t value;
     Wire.beginTransmission(MS5611_ADDRESS);
@@ -243,9 +245,9 @@ uint32_t MS5611::readRegister24(uint8_t reg)
     #endif
     Wire.endTransmission();
 
-    Wire.beginTransmission(MS5611_ADDRESS);
+    //Wire.beginTransmission(MS5611_ADDRESS);
     Wire.requestFrom(MS5611_ADDRESS, 3);
-    while(!Wire.available()) {};
+    //while(!Wire.available()) {};
     #if ARDUINO >= 100
         uint8_t vxa = Wire.read();
         uint8_t vha = Wire.read();
@@ -255,7 +257,7 @@ uint32_t MS5611::readRegister24(uint8_t reg)
         uint8_t vha = Wire.receive();
         uint8_t vla = Wire.receive();
     #endif;
-    Wire.endTransmission();
+    //Wire.endTransmission();
 
     value = ((int32_t)vxa << 16) | ((int32_t)vha << 8) | vla;
 
