@@ -1,0 +1,16 @@
+{
+  "name": "Arduino-MS5611",
+  "keywords": "MS5611, pressure, temperature, i2c",
+  "description": "MS5611 Barometric Pressure & Temperature Sensor Arduino Library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jarzebski/Arduino-MS5611"
+  },
+  "authors": {
+    "name": "Korneliusz Jarzębski",
+    "url": "https://www.jarzebski.pl"
+  },
+  "version": "1.1.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}

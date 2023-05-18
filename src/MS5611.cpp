@@ -1,21 +1,27 @@
 /*
-MS5611.cpp - Class file for the MS5611 Barometric Pressure & Temperature Sensor Arduino Library.
 
-Version: 1.0.0
-(c) 2014 Korneliusz Jarzebski
-www.jarzebski.pl
+The MIT License
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the version 3 GNU General Public License as
-published by the Free Software Foundation.
+Copyright (c) 2014-2023 Korneliusz Jarzębski
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 */
 
 #if ARDUINO >= 100
@@ -181,7 +187,7 @@ double MS5611::readTemperature(bool compensation)
     {
 	if (TEMP < 2000)
 	{
-	    TEMP2 = (dT * dT) / (2 << 30);
+	    TEMP2 = (dT * dT) / pow(2, 31);
 	}
     }
 
@@ -214,17 +220,15 @@ uint16_t MS5611::readRegister16(uint8_t reg)
     #endif
     Wire.endTransmission();
 
-    Wire.beginTransmission(MS5611_ADDRESS);
     Wire.requestFrom(MS5611_ADDRESS, 2);
-    while(!Wire.available()) {};
+
     #if ARDUINO >= 100
         uint8_t vha = Wire.read();
         uint8_t vla = Wire.read();
     #else
         uint8_t vha = Wire.receive();
         uint8_t vla = Wire.receive();
-    #endif;
-    Wire.endTransmission();
+    #endif
 
     value = vha << 8 | vla;
 
@@ -243,9 +247,8 @@ uint32_t MS5611::readRegister24(uint8_t reg)
     #endif
     Wire.endTransmission();
 
-    Wire.beginTransmission(MS5611_ADDRESS);
     Wire.requestFrom(MS5611_ADDRESS, 3);
-    while(!Wire.available()) {};
+
     #if ARDUINO >= 100
         uint8_t vxa = Wire.read();
         uint8_t vha = Wire.read();
@@ -254,8 +257,7 @@ uint32_t MS5611::readRegister24(uint8_t reg)
         uint8_t vxa = Wire.receive();
         uint8_t vha = Wire.receive();
         uint8_t vla = Wire.receive();
-    #endif;
-    Wire.endTransmission();
+    #endif
 
     value = ((int32_t)vxa << 16) | ((int32_t)vha << 8) | vla;
 
