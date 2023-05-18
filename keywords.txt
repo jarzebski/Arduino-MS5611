@@ -1,0 +1,31 @@
+###########################################
+# Syntax Coloring Map For MS5611
+###########################################
+
+###########################################
+# Datatypes (KEYWORD1)
+###########################################
+
+MS5611				KEYWORD1
+
+###########################################
+# Methods and Functions (KEYWORD2)
+###########################################
+begin				KEYWORD2
+readRawTemperature		KEYWORD2
+readRawPressure			KEYWORD2
+readTemperature			KEYWORD2
+readPressure			KEYWORD2
+getAltitude			KEYWORD2
+getSeaLevel			KEYWORD2
+setOversampling			KEYWORD2
+getOversampling			KEYWORD2
+
+###########################################
+# Constants (LITERAL1)
+###########################################
+MS5611_ULTRA_HIGH_RES		LITERAL1
+MS5611_HIGH_RES			LITERAL1
+MS5611_STANDARD			LITERAL1
+MS5611_LOW_POWER		LITERAL1
+MS5611_ULTRA_LOW_POWER		LITERAL1
